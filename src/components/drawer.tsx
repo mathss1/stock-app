@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChartSpline, LogOut, Menu, X, type LucideIcon } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { ModeToggle } from "./mode-toggle";
 
 export default function DrawerMenu() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -55,7 +56,15 @@ export default function DrawerMenu() {
                 Icon={ChartSpline}
               />
             </div>
-            <DrawerItem label="Log out" close={close} to="/" Icon={LogOut} />
+            <div>
+              <ModeToggle />
+              <DrawerItem
+                label="Log out"
+                close={close}
+                to="/login"
+                Icon={LogOut}
+              />
+            </div>
           </ul>
         </div>
       </div>
@@ -75,6 +84,7 @@ function DrawerItem({ label, Icon, to, close }: IDrawerItem) {
   return (
     <li>
       <Link
+        activeProps={{ className: "text-red-500" }}
         onClick={close}
         to={to}
         className="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group dark:text-fuchsia-600"
