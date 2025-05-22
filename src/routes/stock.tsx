@@ -7,55 +7,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { products } from "@/dataset/products";
+import { Badge } from "@/components/ui/badge";
+import type { Status } from "@/interfaces/product";
+import { PencilLine, Star, Trash2 } from "lucide-react";
+import Button from "@mui/material/Button";
 
 export const Route = createFileRoute("/stock")({
   component: Stock,
 });
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+function getVariantColor(status: Status) {
+  if (status === "Available") return "default";
+  if (status === "Unavailable") return "destructive";
+  return "outline";
+}
 
 export function Stock() {
   return (
@@ -63,23 +29,49 @@ export function Stock() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Products</TableHead>
+            <TableHead className="w-[100px]">ID</TableHead>
+            <TableHead>Products</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead>Cost</TableHead>
+            <TableHead>Rating</TableHead>
+            <TableHead className="text-right pr-12.5">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
-              </TableCell>
-            </TableRow>
-          ))}
+          {products.map((product) => {
+            const formatedCost = new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(product.cost);
+            return (
+              <TableRow key={product.id}>
+                <TableCell className="font-medium">{product.id}</TableCell>
+                <TableCell>{product.product}</TableCell>
+                <TableCell>
+                  <Badge variant={getVariantColor(product.status)}>
+                    {product.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>{formatedCost}</TableCell>
+                <TableCell>
+                  <div className="flex gap-3">
+                    {product.rating.toFixed(1)}
+                    <Star size={20} fill="yellow" />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex justify-end">
+                    <Button>
+                      <PencilLine />
+                    </Button>
+                    <Button>
+                      <Trash2 color="red" />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { dataset, valueFormatter } from "../dataset/cellar.tsx";
+import { dataset, valueFormatter } from "../dataset/cellar.ts";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 export const Route = createFileRoute("/dashboard")({
