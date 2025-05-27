@@ -21,5 +21,5 @@ export const Route = createRootRoute({
       </ThemeProvider>
     );
   },
-  notFoundComponent: () => <div>quaoa</div>,
+  notFoundComponent: () => <div>alibabá</div>,
 });

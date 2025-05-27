@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mail, Fingerprint } from "lucide-react";
-import beer from "../assets/logo.svg";
+import carne from "../assets/logo.png";
 import React from "react";
 
 export const Route = createFileRoute("/login")({
@@ -11,7 +11,7 @@ function Login() {
   return (
     <div className="w-full h-screen flex items-center justify-center ">
       <div className="w-[90%] max-w-sm md:max-w-md lg:max-w-md p-5 bg-gray-900 flex-col flex items-center gap-3 rounded-xl shadow-slate-500 shadow-lg">
-        <img src={beer} alt="logo" className="w-12 md:w-14" />
+        <img src={carne} alt="logo" className="w-12 md:w-14" />
         <h1 className="text-lg md:text-xl font-semibold">Welcome Back</h1>
 
         <div className="w-full flex flex-col gap-3">

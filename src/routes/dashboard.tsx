@@ -28,13 +28,13 @@ function RouteComponent() {
             xAxis={[{ dataKey: "month" }]}
             series={[
               {
-                dataKey: "vodka",
-                label: "Vodka",
+                dataKey: "aves",
+                label: "aves",
                 valueFormatter,
               },
-              { dataKey: "whisky", label: "Whisky", valueFormatter },
-              { dataKey: "beer", label: "Beer", valueFormatter },
-              { dataKey: "wine", label: "Wine", valueFormatter },
+              { dataKey: "linguiça", label: "linguiça", valueFormatter },
+              { dataKey: "carne", label: "carne", valueFormatter },
+              { dataKey: "carvão", label: "carvão", valueFormatter },
             ]}
             {...chartSetting}
           />
